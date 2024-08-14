@@ -57,7 +57,7 @@ while True:
         messages = [{'role': 'user', 'content': c+' '+prompt+' '+" Give answer with respect to the messages provided"}]
 
         # Make the request using the Ollama library
-        response = ollama.chat(model=, messages=messages, stream=True,)
+        response = ollama.chat(model=model_name, messages=messages, stream=True,)
 
         print(". . . . . . . . R E S P O N S E   "+str(i)+" . . . . . . . . \n")
         
@@ -84,12 +84,12 @@ while True:
         new_responses = []
         for response in responses:
             message = response+" Analyze the response, summarize and give the answer to the prompt: "+prompt
-            responses = ollama.chat(model='llama3.1:8b', messages=messages,)
+            responses = ollama.chat(model=model_name, messages=messages,)
             new_responses.append(responses['message']['content'])
         responses = new_responses
 
     print('\n. . . . . . . . F I N A L   R E S P O N S E . . . . . . . .\n'+responses[0])
     if saveDirectory!='N' and saveDirectory!='n':
-            path = os.path.join(directory,("Final_Response.txt"))
+            path = os.path.join(saveDirectory,("Final_Response.txt"))
             with open(path,'w') as file:
                 file.write(res)
